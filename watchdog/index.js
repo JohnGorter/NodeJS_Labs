@@ -11,7 +11,12 @@ let fs = require('fs');
 
 // create a constructor function to watch files...
 module.exports = function (dir){
-   // task 2. your code here...
+
+  // watch the filesystem for the given directory
+  fs.watch(dir, (e, f) => {
+      // raise the refresh event
+    this.emit('refresh', { event: e, filename: f});
+  });
 }
 
 // make the watchdog an eventemitter..

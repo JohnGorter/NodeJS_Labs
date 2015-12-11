@@ -8,7 +8,15 @@ let fs = require('fs');
 (function() {
 	
 	function injectinternal(file, mark, injectable, cb){
-	  // task 1. your code here...
+		// read the file given as parameter 
+	  	fs.readFile(file, 'utf8', (err, source) => {
+			// read the injectable as a file and on success...
+			fs.readFile(injectable, 'utf8', (err, injectee) => {
+				// replace the content of the original with the injector at the mark and
+				// call the callback to further process the enriched data..	
+				cb(source.replace(mark, injectee + mark));
+			});
+		});
 	}
 	
 	// return an object that exposes this functionality
