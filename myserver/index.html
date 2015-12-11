@@ -8,28 +8,29 @@
 		<div class="jumbotron">
 			<h1>My Server demo <br/><small>creating a live server setup</small></h1>
 		</div>
-		This is a page served by express in NodeJS.
+		<p>If all went well, you should
+		be able to use your favorite editor to change this file on the filesystem and
+		see the browser automatically refresh. The nodejs components used are:
+		<ul>
+			<li>express (community module)</li>
+			<li>socketio (community module)</li>
+			<li>watchdog (custom module)</li>
+			<li>injector (custom module)</li>
+			<li>myserver (custom module)</li>
+		</ul>
+		The setup works as follows: once you start the server 'node ../myserver/index.js', the
+		server (express) is started and serves files with .html extensions. The browser is started
+		and navigates to http://localhost:3000/index.html. Before the contents of the html page is
+		returned, myserver uses the injector component to inject script into the resulting page.
+		This script opens a socketio connection back to the server.
+		</p>
+		<p>
+		The server also starts a watcher on the filesystem for the current directory. If the file changes
+		on the filesystem, the server instructs the connected browser (through socketio) to reload the page.
+		The browser reloads the page and the inject takes case of reconnecting to the server with socketio.
+		</p>
+		
 		</div>
 		<div style="height:1px;margin-top:10px;border:1px solid black;"></div>
-		<div style="height:100%;width:100%;border:1px solid black;background-color:black;color:white;font-family: inherit;position:absolute;padding:5px;margin-left:0px;">
-			<span id="status"></span>
-			<div>Console output:<br/><span id="console"></span></div>
-		</div>
-	    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
-		<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-		<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-		  
-		<script>
-			var socket = io();
-			
-			// this calback just feeds the console...
-			socket.on('data', function(data){  $("#console").append("[server] " + data ); });
-			
-			$(function(){
-				// this gets executed on loading of the page..
-				$("#console").append("[client] Connecting to server socket..<br/>");
-				$("body").animate({backgroundColor:'yellow'}, 500).animate({backgroundColor:'white'}, 500); 
-			}); 
-	    </script>
 	</body>
 </html>  

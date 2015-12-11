@@ -1,0 +1,27 @@
+<div style="height:100%;width:100%;border:1px solid black;background-color:black;color:white;font-family: inherit;position:absolute;padding:5px;margin-left:0px;">
+  <span id="status"></span>
+  <div>Console output:<br/><span id="console"></span></div>
+</div>
+<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+
+<script>
+  var socket = io();
+  
+  // this calback just feeds the console...
+  socket.on('data', function(data){  $("#console").append("[server] " + data ); });
+  
+  // this callback refreshes the page 
+  socket.on('refresh', function(){
+    $("#status").text("reloading page...");
+    window.setTimeout(function(){ window.location.reload(); }, 500); 
+  });
+  
+  $(function(){
+	  // this gets executed on loading of the page..
+	  $("#status").text("Refresh on " + new Date().toLocaleTimeString());
+	  $("#console").append("[client] Connecting to server socket..<br/>");
+	  $("body").animate({backgroundColor:'yellow'}, 500).animate({backgroundColor:'white'}, 500); 
+  }); 
+</script>
