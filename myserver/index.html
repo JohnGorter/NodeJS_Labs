@@ -1,0 +1,35 @@
+<html>
+	<head>
+		<title>Example page</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+	</head>
+	<body>
+		<div class="container">
+		<div class="jumbotron">
+			<h1>My Server demo <br/><small>creating a live server setup</small></h1>
+		</div>
+		This is a page served by express in NodeJS.
+		</div>
+		<div style="height:1px;margin-top:10px;border:1px solid black;"></div>
+		<div style="height:100%;width:100%;border:1px solid black;background-color:black;color:white;font-family: inherit;position:absolute;padding:5px;margin-left:0px;">
+			<span id="status"></span>
+			<div>Console output:<br/><span id="console"></span></div>
+		</div>
+	    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+		<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+		<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+		  
+		<script>
+			var socket = io();
+			
+			// this calback just feeds the console...
+			socket.on('data', function(data){  $("#console").append("[server] " + data ); });
+			
+			$(function(){
+				// this gets executed on loading of the page..
+				$("#console").append("[client] Connecting to server socket..<br/>");
+				$("body").animate({backgroundColor:'yellow'}, 500).animate({backgroundColor:'white'}, 500); 
+			}); 
+	    </script>
+	</body>
+</html>  
