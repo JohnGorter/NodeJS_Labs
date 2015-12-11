@@ -5,6 +5,8 @@ module.exports = {
 		let exec = require('child_process').exec;
 		
 		// your require for express here....
+		let express = require('express');
+		let app = express(); 
 		
 		let http = require('http').Server(app);
 		let io = require('socket.io')(http);
@@ -15,7 +17,8 @@ module.exports = {
 
 		// use express to catch all .html urls 
 		// your code for express here
-
+		app.get("*.html", (req, res) => res.sendFile(__dirname + req.url));
+		
 		// if a client connected, send him an acknowledgement..
 		io.on('connect', (socket)=>socket.emit('data', "connection established"));
 				
