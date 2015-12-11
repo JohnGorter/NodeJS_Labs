@@ -1,0 +1,35 @@
+<html>
+	<head>
+		<title>Example page</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+	</head>
+	<body>
+		<div class="container">
+		<div class="jumbotron">
+			<h1>My Server demo <br/><small>creating a live server setup</small></h1>
+		</div>
+		<p>If all went well, you should be able to use your favorite editor to change this file on the filesystem and
+		see the browser automatically refresh. The nodejs components used are:
+		<ul>
+			<li>express (community module)</li>
+			<li>socketio (community module)</li>
+			<li>watchdog (custom module)</li>
+			<li>injector (custom module)</li>
+			<li>myserver (custom module)</li> 
+		</ul>
+		The setup works as follows: once you start the server 'node ../myserver/index.js', the
+		server (express) is started and serves files with .html extensions. The browser is started
+		and navigates to http://localhost:3000/index.html. Before the contents of the html page is
+		returned, myserver uses the injector component to inject script into the resulting page.
+		This script opens a socketio connection back to the server.
+		</p>
+		<p>
+		The server also starts a watcher on the filesystem for the current directory. If the file changes
+		on the filesystem, the server instructs the connected browser (through socketio) to reload the page.
+		The browser reloads the page and the inject takes case of reconnecting to the server with socketio.
+		</p>
+		
+		</div>
+		<div style="height:1px;margin-top:10px;border:1px solid black;"></div>
+	</body>
+</html>  
